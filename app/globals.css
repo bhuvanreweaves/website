@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 33% 97%;
+    --foreground: 20 20% 12%;
+    --card: 40 33% 97%;
+    --card-foreground: 20 20% 12%;
+    --popover: 40 33% 97%;
+    --popover-foreground: 20 20% 12%;
+    --primary: 20 20% 12%;
+    --primary-foreground: 40 33% 97%;
+    --secondary: 33 27% 86%;
+    --secondary-foreground: 20 20% 12%;
+    --muted: 33 20% 90%;
+    --muted-foreground: 20 10% 40%;
+    --accent: 33 27% 86%;
+    --accent-foreground: 20 20% 12%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 33 20% 85%;
+    --input: 33 20% 85%;
+    --ring: 20 20% 12%;
+    --radius: 0.25rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-cream text-brown font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5 {
+    @apply font-serif;
+  }
+
+  ::selection {
+    background-color: #2B2118;
+    color: #F8F5F0;
+  }
+
+  /* Smooth scroll */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #F8F5F0;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #D4C4B0;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #2B2118;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-brown text-cream px-8 py-3 text-sm tracking-widest uppercase font-sans font-medium transition-all duration-300 hover:bg-brown-light;
+  }
+
+  .btn-outline {
+    @apply border border-brown text-brown px-8 py-3 text-sm tracking-widest uppercase font-sans font-medium transition-all duration-300 hover:bg-brown hover:text-cream;
+  }
+
+  .section-title {
+    @apply font-serif text-5xl md:text-6xl text-brown leading-[1.05] font-light;
+  }
+
+  .section-subtitle {
+    @apply font-sans text-[11px] tracking-[0.3em] uppercase text-brown-medium mb-5;
+  }
+
+  .luxury-input {
+    @apply w-full border-0 border-b border-warm-beige bg-transparent py-3 text-brown placeholder:text-brown-medium/50 focus:outline-none focus:border-brown transition-colors;
+  }
+}
