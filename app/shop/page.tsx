@@ -284,7 +284,7 @@ function ShopContent() {
                     </div>
 
                     <p className="text-[9px] tracking-widest uppercase text-brown/40 mb-1">
-                      {product.categoryLabel} · {product.fabric}
+                      {product.category.replace(/-/g, " ")} · {product.fabric}
                     </p>
                     <h3 className="font-serif text-base text-brown mb-1.5 leading-snug">
                       <Link href={`/product/${product.slug}`} className="hover:opacity-70 transition-opacity">

@@ -68,7 +68,7 @@ export default function ProductPage({
             href={`/shop?category=${product.category}`}
             className="hover:text-brown transition-colors"
           >
-            {product.categoryLabel}
+            {product.category.replace(/-/g, " ")}
           </Link>
           <span>/</span>
           <span className="text-brown truncate max-w-40">{product.name}</span>
@@ -136,7 +136,7 @@ export default function ProductPage({
           >
             <div className="flex items-center justify-between mb-4">
               <p className="text-xs tracking-widest uppercase text-brown/40">
-                {product.categoryLabel}
+                {product.category.replace(/-/g, " ")}
               </p>
               <button className="text-brown/30 hover:text-brown transition-colors">
                 <Share2 size={14} strokeWidth={1.5} />
@@ -261,13 +261,13 @@ export default function ProductPage({
 
             <TabsContent value="description">
               <p className="text-sm text-brown/60 leading-relaxed max-w-2xl">
-                {product.longDescription}
+                {product.description}
               </p>
             </TabsContent>
 
             <TabsContent value="fabric">
               <p className="text-sm text-brown/60 leading-relaxed max-w-2xl">
-                {product.fabricDetails}
+                {product.fabric} — {product.description}
               </p>
             </TabsContent>
 

@@ -41,43 +41,27 @@ function mapMedusaProduct(p: any): Product {
     if (img.url && !images.includes(img.url)) images.push(img.url);
   });
 
-  const tags: string[] = (p.tags || []).map((t: any) => t.value);
+  const tags: string[] = (p.tags || []).map((t: any) => t.value as string);
 
-  const categoryLabels: Record<string, string> = {
-    "formal-shirts": "Formal Shirts",
-    "printed-shirts": "Printed Shirts",
-    "short-kurtas": "Short Kurtas",
-    "long-kurtas": "Long Kurtas",
-  };
-
-  const category = (meta.category || tags[0] || "formal-shirts") as ProductCategory;
+  const category = (meta.category || tags[0] || "silk-saree-shirts") as ProductCategory;
 
   return {
     id: p.id,
     slug: p.handle,
     name: p.title,
     category,
-    categoryLabel: categoryLabels[category] || category,
     price,
     originalPrice: meta.original_price ? Number(meta.original_price) : undefined,
     description: p.description || "",
-    longDescription: meta.long_description || p.description || "",
     fabric: (meta.fabric || "Cotton") as Fabric,
-    fabricDetails: meta.fabric_details || "",
     careInstructions:
-      meta.care_instructions ||
-      "Hand wash in cold water with mild detergent. Dry in shade.",
+      meta.care_instructions || "Dry clean recommended.",
     shippingInfo:
-      meta.shipping_info ||
-      "Ships within 3-5 business days. Free shipping on orders above ₹2000.",
+      meta.shipping_info || "Ships in 10–14 business days. Free shipping above ₹2,000.",
     sizes: sizes.length > 0 ? sizes : ["S", "M", "L", "XL"],
     images,
-    tags,
     isNew: meta.is_new === "true",
     isBestseller: meta.is_bestseller === "true",
-    inStock: (p.variants || []).some(
-      (v: any) => !v.manage_inventory || (v.inventory_quantity ?? 1) > 0
-    ),
   };
 }
 
