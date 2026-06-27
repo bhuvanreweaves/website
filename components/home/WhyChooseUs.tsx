@@ -6,114 +6,96 @@ import { motion } from "framer-motion";
 const features = [
   {
     number: "01",
-    title: "Premium Fabrics",
-    subtitle: "Handloom Cotton · Belgian Linen · Chanderi Silk · Khadi",
+    title: "Your Saree Lives On",
+    subtitle: "Zero waste. All meaning.",
     description:
-      "We source only the finest Indian textiles from master weavers across the country. Each cloth is chosen for its hand, weight, and soul.",
+      "We use the full saree — borders become cuffs, pallu becomes the back panel. Nothing is wasted. Every centimetre of your saree finds its place in the shirt.",
   },
   {
     number: "02",
-    title: "Handcrafted Quality",
-    subtitle: "No Shortcuts. No Compromises.",
+    title: "One-of-a-Kind, Always",
+    subtitle: "No two shirts are the same.",
     description:
-      "Every garment passes through artisans who have spent decades perfecting their craft. The stitching, the pressing, the finishing — all done by hand.",
+      "Because every saree is different, every shirt we make is unique. You will never see someone else in the same shirt. That is the whole point.",
   },
   {
     number: "03",
-    title: "Tailor Made Fit",
-    subtitle: "Standard Sizes · Fully Bespoke",
+    title: "Master Tailors",
+    subtitle: "Decades of craft.",
     description:
-      "Standard sizes that actually fit, or fully bespoke tailoring to your exact measurements. The best garment is the one made for your body.",
+      "Our tailors have spent decades working with delicate Indian textiles. They know how silk behaves, how to cut without waste, how to preserve the weave direction.",
   },
   {
     number: "04",
     title: "Pan India Shipping",
-    subtitle: "Free Shipping Above ₹2000",
+    subtitle: "Free above ₹2,000.",
     description:
-      "We deliver across all of India. Your handcrafted garment, wherever you are — handled with the same care that went into making it.",
+      "We pick up your saree and deliver your finished shirt anywhere in India. Carefully packed, insured, and tracked at every step.",
   },
 ];
 
 export default function WhyChooseUs() {
   return (
-    <section className="bg-charcoal">
-      {/* Header */}
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="max-w-7xl mx-auto px-6 lg:px-14 pt-28 pb-20 border-b border-cream/10"
-      >
-        <p className="text-[10px] tracking-[0.35em] uppercase text-cream/35 font-sans mb-6">
-          The Bhuvan Standard
-        </p>
-        <h2 className="font-serif font-light text-cream text-[clamp(3rem,6vw,5.5rem)] leading-[0.95]">
-          The Difference Is
-          <br />
-          <span className="italic">In The Details</span>
-        </h2>
-      </motion.div>
+    <section className="bg-[#1E1E1E] py-24 px-6 md:px-12">
+      <div className="max-w-7xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="mb-16"
+        >
+          <p className="font-sans text-xs tracking-[0.3em] uppercase text-[#8B6352] mb-4">
+            Why Bhuvan Reweaves
+          </p>
+          <h2 className="font-serif text-4xl md:text-5xl text-[#F8F5F0] max-w-2xl leading-tight">
+            The Difference Is In
+            <br />
+            <em className="text-[#D4C4B0]">Every Detail.</em>
+          </h2>
+        </motion.div>
 
-      {/* Feature Bands */}
-      <div className="max-w-7xl mx-auto px-6 lg:px-14">
-        {features.map((f, i) => (
-          <motion.div
-            key={f.number}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1, duration: 0.7 }}
-            className="group grid grid-cols-12 gap-6 lg:gap-10 py-12 lg:py-14 border-b border-cream/10 hover:border-cream/25 transition-colors duration-500"
-          >
-            {/* Number */}
-            <div className="col-span-2 lg:col-span-1 flex items-start pt-1">
-              <span className="font-serif text-[11px] tracking-[0.2em] text-cream/25 font-light group-hover:text-cream/50 transition-colors duration-500">
+        <div className="space-y-0">
+          {features.map((f, i) => (
+            <motion.div
+              key={f.number}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.1 }}
+              className="group border-t border-[#2B2118] py-8 grid grid-cols-1 md:grid-cols-[80px_1fr_2fr] gap-4 md:gap-8 hover:border-[#8B6352] transition-colors duration-300"
+            >
+              <p className="font-serif text-[#5C4033] text-lg group-hover:text-[#8B6352] transition-colors duration-300">
                 {f.number}
-              </span>
-            </div>
-
-            {/* Title block */}
-            <div className="col-span-10 lg:col-span-4 flex flex-col justify-center">
-              <h3 className="font-serif text-cream text-3xl lg:text-4xl font-light leading-tight group-hover:text-cream transition-colors mb-2">
-                {f.title}
-              </h3>
-              <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-cream/30">
-                {f.subtitle}
               </p>
-            </div>
+              <div>
+                <p className="font-serif text-xl text-[#F8F5F0]">{f.title}</p>
+                <p className="font-sans text-xs tracking-widest uppercase text-[#8B6352] mt-1">
+                  {f.subtitle}
+                </p>
+              </div>
+              <p className="font-sans text-[#D4C4B0] text-sm leading-relaxed">{f.description}</p>
+            </motion.div>
+          ))}
+          <div className="border-t border-[#2B2118]" />
+        </div>
 
-            {/* Horizontal rule — desktop */}
-            <div className="hidden lg:flex col-span-1 items-center">
-              <div className="w-full h-px bg-cream/15 group-hover:bg-cream/35 transition-colors duration-500" />
-            </div>
-
-            {/* Description */}
-            <div className="col-span-12 lg:col-span-6 flex items-center">
-              <p className="font-sans text-sm text-cream/45 leading-relaxed font-light group-hover:text-cream/60 transition-colors duration-500">
-                {f.description}
-              </p>
-            </div>
-          </motion.div>
-        ))}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="mt-16 max-w-2xl"
+        >
+          <p className="font-serif text-xl md:text-2xl text-[#D4C4B0] leading-relaxed italic">
+            "A saree carries the weight of memory — a wedding, a festival, a grandmother's touch.
+            Our job is to keep that weight alive, in a form you wear every day."
+          </p>
+          <p className="font-sans text-xs tracking-widest uppercase text-[#8B6352] mt-4">
+            — Bhuvan, Founder
+          </p>
+        </motion.div>
       </div>
-
-      {/* Editorial Quote */}
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="max-w-7xl mx-auto px-6 lg:px-14 py-28 lg:py-36"
-      >
-        <blockquote className="font-serif text-[clamp(1.6rem,3.5vw,3rem)] text-cream/70 leading-[1.25] font-light italic max-w-4xl">
-          "Clothing is not just fabric and thread — it is an expression of
-          identity, a mark of occasion, and a piece of art."
-        </blockquote>
-        <p className="mt-8 font-sans text-[10px] tracking-[0.3em] uppercase text-cream/30">
-          — Bhuvan, Founder
-        </p>
-      </motion.div>
     </section>
   );
 }

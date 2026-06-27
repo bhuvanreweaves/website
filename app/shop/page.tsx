@@ -22,14 +22,23 @@ function formatPrice(price: number) {
 type SortOption = "latest" | "price-low" | "price-high";
 
 const categoryOptions: { value: ProductCategory | "all"; label: string }[] = [
-  { value: "all", label: "All Categories" },
-  { value: "formal-shirts", label: "Formal Shirts" },
-  { value: "printed-shirts", label: "Printed Shirts" },
-  { value: "short-kurtas", label: "Short Kurtas" },
-  { value: "long-kurtas", label: "Long Kurtas" },
+  { value: "all", label: "All Shirts" },
+  { value: "silk-saree-shirts", label: "Silk Saree Shirts" },
+  { value: "cotton-saree-shirts", label: "Cotton Saree Shirts" },
+  { value: "kanjivaram-shirts", label: "Kanjivaram Shirts" },
+  { value: "banarasi-shirts", label: "Banarasi Shirts" },
 ];
 
-const fabricOptions: Fabric[] = ["Cotton", "Linen", "Khadi", "Silk Cotton", "Modal", "Chanderi"];
+const fabricOptions: Fabric[] = [
+  "Kanjivaram Silk",
+  "Banarasi Silk",
+  "Mysore Silk",
+  "Chanderi Silk",
+  "Patola Silk",
+  "Cotton",
+  "Handloom Cotton",
+  "Ikat Cotton",
+];
 
 function ShopContent() {
   const searchParams = useSearchParams();
@@ -77,7 +86,7 @@ function ShopContent() {
         >
           <p className="section-subtitle">Our Store</p>
           <h1 className="font-serif text-4xl md:text-5xl text-brown">
-            The Collection
+            Shirts from Sarees
           </h1>
         </motion.div>
       </div>
@@ -195,7 +204,7 @@ function ShopContent() {
                 <input
                   type="range"
                   min={1000}
-                  max={6000}
+                  max={5000}
                   step={500}
                   value={priceMax}
                   onChange={(e) => setPriceMax(Number(e.target.value))}
@@ -203,7 +212,7 @@ function ShopContent() {
                 />
                 <div className="flex justify-between text-xs text-brown/40 mt-1">
                   <span>₹1,000</span>
-                  <span>₹6,000</span>
+                  <span>₹5,000</span>
                 </div>
               </div>
             </motion.aside>
@@ -229,7 +238,7 @@ function ShopContent() {
                   onClick={() => {
                     setCategory("all");
                     setSelectedFabrics([]);
-                    setPriceMax(6000);
+                    setPriceMax(5000);
                   }}
                   className="mt-4 text-xs tracking-widest uppercase text-brown/50 hover:text-brown transition-colors underline"
                 >

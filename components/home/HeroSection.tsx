@@ -6,169 +6,130 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: (delay = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.9, delay, ease: [0.22, 1, 0.36, 1] },
-  }),
-};
-
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex overflow-hidden bg-charcoal">
-      {/* Left Panel — Content */}
-      <div className="relative z-10 w-full lg:w-[58%] flex flex-col justify-end pb-20 lg:pb-28 pt-36 px-6 lg:px-14">
-        {/* Eyebrow */}
-        <motion.p
-          custom={0.2}
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          className="text-[10px] tracking-[0.35em] uppercase text-cream/40 mb-7 font-sans"
+    <section className="relative min-h-screen flex flex-col lg:flex-row overflow-hidden bg-[#1E1E1E]">
+      {/* Text Side */}
+      <div className="flex-1 flex flex-col justify-center px-8 md:px-16 lg:px-20 py-24 lg:py-0 z-10 order-2 lg:order-1">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          Handcrafted in India
-        </motion.p>
+          <p className="text-[#D4C4B0] font-sans text-xs tracking-[0.3em] uppercase mb-6">
+            Handcrafted in India
+          </p>
+        </motion.div>
 
-        {/* Headline */}
         <motion.h1
-          custom={0.4}
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          className="font-serif text-[clamp(3.5rem,7vw,6.5rem)] text-cream leading-[0.95] mb-8 font-light"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
+          className="font-serif text-5xl md:text-6xl lg:text-7xl text-[#F8F5F0] leading-tight mb-6"
         >
-          Crafted For You,
+          Your Saree.
           <br />
-          <span className="italic">Tailored To</span>
-          <br />
-          Perfection.
+          <em className="not-italic text-[#D4C4B0]">Reborn</em> as a Shirt.
         </motion.h1>
 
-        {/* Thin rule */}
         <motion.div
-          custom={0.55}
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          className="w-16 h-px bg-cream/25 mb-7"
+          initial={{ opacity: 0, scaleX: 0 }}
+          animate={{ opacity: 1, scaleX: 1 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="w-16 h-px bg-[#8B6352] mb-6 origin-left"
         />
 
-        {/* Subheadline */}
         <motion.p
-          custom={0.65}
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          className="text-sm md:text-base text-cream/55 leading-relaxed mb-10 max-w-md font-sans font-light"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.35, ease: "easeOut" }}
+          className="font-sans text-[#D4C4B0] text-base md:text-lg leading-relaxed max-w-md mb-10"
         >
-          Premium handcrafted sarees, shirts and kurtas made with precision.
-          Every thread, a story of skilled artisans.
+          We transform cherished sarees — yours or ours — into handcrafted shirts that carry their story in every thread. Silk, cotton, Kanjivaram, Banarasi. Every shirt is one-of-a-kind.
         </motion.p>
 
-        {/* CTAs */}
         <motion.div
-          custom={0.8}
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          className="flex flex-col sm:flex-row gap-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+          className="flex flex-col sm:flex-row gap-4 mb-16"
         >
           <Link
             href="/shop"
-            className="group inline-flex items-center gap-3 bg-cream text-brown px-8 py-4 text-[11px] tracking-[0.2em] uppercase font-sans font-medium transition-all duration-300 hover:bg-beige"
+            className="inline-flex items-center justify-center gap-2 bg-[#F8F5F0] text-[#2B2118] font-sans text-sm tracking-widest uppercase px-8 py-4 hover:bg-[#E8DDCF] transition-colors duration-300"
           >
-            Shop Collection
-            <ArrowRight
-              size={13}
-              className="group-hover:translate-x-1 transition-transform"
-              strokeWidth={1.5}
-            />
+            Shop Shirts <ArrowRight size={14} />
           </Link>
           <Link
             href="/customization"
-            className="inline-flex items-center gap-3 border border-cream/30 text-cream px-8 py-4 text-[11px] tracking-[0.2em] uppercase font-sans font-medium transition-all duration-300 hover:bg-cream/10"
+            className="inline-flex items-center justify-center gap-2 border border-[#8B6352] text-[#F8F5F0] font-sans text-sm tracking-widest uppercase px-8 py-4 hover:border-[#F8F5F0] transition-colors duration-300"
           >
-            Customize Your Outfit
+            Send Your Saree
           </Link>
         </motion.div>
 
-        {/* Stats */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.3, duration: 0.6 }}
-          className="mt-16 flex items-center gap-10 border-t border-cream/10 pt-8"
+          transition={{ duration: 0.8, delay: 0.7 }}
+          className="flex gap-10"
         >
           {[
-            { value: "500+", label: "Garments Crafted" },
-            { value: "100%", label: "Handmade" },
+            { value: "500+", label: "Sarees Rewoven" },
+            { value: "100%", label: "Handcrafted" },
             { value: "Pan India", label: "Delivery" },
-          ].map((stat, i) => (
-            <div key={stat.label} className={i > 0 ? "border-l border-cream/10 pl-10" : ""}>
-              <div className="font-serif text-2xl text-cream font-light">{stat.value}</div>
-              <div className="text-[9px] tracking-[0.25em] uppercase text-cream/35 mt-1 font-sans">
+          ].map((stat) => (
+            <div key={stat.label}>
+              <p className="font-serif text-2xl text-[#F8F5F0]">{stat.value}</p>
+              <p className="font-sans text-[#8B6352] text-xs tracking-widest uppercase mt-1">
                 {stat.label}
-              </div>
+              </p>
             </div>
           ))}
         </motion.div>
       </div>
 
-      {/* Right Panel — Images */}
-      <motion.div
-        initial={{ opacity: 0, x: 30 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1.1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-        className="hidden lg:flex lg:w-[42%] flex-col relative"
-      >
-        {/* Top image — Saree */}
+      {/* Image Side */}
+      <div className="relative w-full lg:w-[45%] h-[55vw] lg:h-auto order-1 lg:order-2 flex flex-col">
         <div className="relative flex-1 overflow-hidden">
           <Image
             src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=900&q=85"
-            alt="Handcrafted saree"
+            alt="A vibrant silk saree"
             fill
+            className="object-cover"
             priority
-            className="object-cover object-center"
-            sizes="42vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-charcoal/30 to-transparent" />
-          <div className="absolute bottom-4 left-5">
-            <span className="text-[9px] tracking-[0.3em] uppercase text-cream/60 font-sans bg-charcoal/40 backdrop-blur-sm px-2 py-1">
-              Sarees
-            </span>
+          <div className="absolute inset-0 bg-black/20" />
+          <div className="absolute bottom-4 left-4 bg-[#2B2118]/80 backdrop-blur-sm px-3 py-1.5">
+            <p className="font-sans text-[#D4C4B0] text-xs tracking-widest uppercase">The Saree</p>
           </div>
         </div>
-
-        {/* Divider */}
-        <div className="h-px bg-charcoal" />
-
-        {/* Bottom image — Shirt */}
-        <div className="relative flex-1 overflow-hidden">
+        <div className="relative flex-1 overflow-hidden border-t border-[#2B2118]">
           <Image
             src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=900&q=85"
-            alt="Handcrafted shirt"
+            alt="A handcrafted shirt made from a saree"
             fill
-            className="object-cover object-top"
-            sizes="42vw"
+            className="object-cover"
+            priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 to-transparent" />
-          <div className="absolute bottom-4 left-5">
-            <span className="text-[9px] tracking-[0.3em] uppercase text-cream/60 font-sans bg-charcoal/40 backdrop-blur-sm px-2 py-1">
-              Shirts & Kurtas
-            </span>
+          <div className="absolute inset-0 bg-black/20" />
+          <div className="absolute bottom-4 left-4 bg-[#2B2118]/80 backdrop-blur-sm px-3 py-1.5">
+            <p className="font-sans text-[#D4C4B0] text-xs tracking-widest uppercase">The Shirt</p>
           </div>
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute right-6 bottom-10 flex flex-col items-center gap-2">
-          <div className="w-px h-10 bg-cream/20 animate-pulse" />
-          <span className="text-[8px] tracking-[0.3em] uppercase text-cream/25 rotate-90 origin-center mt-3 font-sans">
+        <div className="absolute bottom-8 right-6 hidden lg:flex flex-col items-center gap-2">
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+            className="w-px h-12 bg-gradient-to-b from-[#8B6352] to-transparent"
+          />
+          <p className="font-sans text-[#8B6352] text-[10px] tracking-[0.2em] uppercase rotate-90 origin-center mt-4">
             Scroll
-          </span>
+          </p>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

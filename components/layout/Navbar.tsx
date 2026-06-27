@@ -7,10 +7,10 @@ import { ShoppingBag, Menu, Search, X } from "lucide-react";
 import MobileMenu from "./MobileMenu";
 
 const navLinks = [
-  { label: "Shop", href: "/shop" },
-  { label: "New Arrivals", href: "/shop?filter=new" },
-  { label: "Customization", href: "/customization" },
+  { label: "Shop Shirts", href: "/shop" },
+  { label: "Send Your Saree", href: "/customization" },
   { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {

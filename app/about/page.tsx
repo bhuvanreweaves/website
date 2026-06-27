@@ -2,34 +2,35 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Metadata } from "next";
+
 export const metadata: Metadata = {
   title: "About Us — Bhuvan Reweaves",
-  description: "The story behind Bhuvan Reweaves — handcrafted Indian clothing with a soul.",
+  description: "The story behind Bhuvan Reweaves — turning cherished sarees into handcrafted shirts.",
 };
 
 const values = [
   {
-    title: "Rooted in Craft",
+    title: "Sarees Have Stories",
     description:
-      "We work directly with artisan communities across India — weavers in Coimbatore, block printers in Bagru, embroiderers in Lucknow. Every garment is a direct collaboration between designer and maker.",
+      "Every saree carries memory — a wedding, a festival, a grandmother's touch. We believe those stories deserve to live on, not sit folded in a box. We give them a second life.",
   },
   {
-    title: "Fabric as Philosophy",
+    title: "Zero Waste Craft",
     description:
-      "We believe the fabric is the garment. Before a single cut is made, we spend weeks sourcing the right textile — testing its breathability, drape, durability, and story.",
+      "When we cut a shirt from a saree, nothing is wasted. Borders become cuffs. The pallu becomes a back panel or pocket lining. Every centimetre of your saree finds its place.",
   },
   {
-    title: "Slow Fashion",
+    title: "One Shirt at a Time",
     description:
-      "We produce in small batches. No overstock, no waste. Each collection is limited and intentional. We'd rather make fewer things better than many things faster.",
+      "We don't run factories. We run a workshop. Each shirt is cut and sewn individually, by a tailor who understands the specific saree they are working with — its drape, its weave, its weight.",
   },
 ];
 
 const process = [
-  { step: "01", title: "Concept", description: "Every collection begins with a conversation — with artisans, with customers, with the fabric itself." },
-  { step: "02", title: "Source", description: "We travel across India to find the right weaves, the right dyes, the right makers for each garment." },
-  { step: "03", title: "Craft", description: "Skilled artisans bring the concept to life — weaving, cutting, stitching, and finishing by hand." },
-  { step: "04", title: "Perfect", description: "Each garment is inspected for quality before it reaches you. We fix what we're not proud of." },
+  { step: "01", title: "You Send the Saree", description: "Post your saree to us or drop it off in person. Silk, cotton, Kanjivaram, Banarasi — any saree works." },
+  { step: "02", title: "We Consult", description: "Our tailor reviews the saree with you — fabric width, pattern placement, what to preserve and how." },
+  { step: "03", title: "We Craft", description: "The saree is carefully cut and tailored into your shirt, preserving borders and patterns exactly where they belong." },
+  { step: "04", title: "Delivered Home", description: "Your shirt — and any leftover fabric — is shipped back to you, carefully packed, within 14 days." },
 ];
 
 export default function AboutPage() {
@@ -39,7 +40,7 @@ export default function AboutPage() {
       <section className="relative h-[60vh] min-h-[400px] overflow-hidden">
         <Image
           src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=1400&q=80"
-          alt="Our craft"
+          alt="A tailor carefully cutting a saree"
           fill
           priority
           className="object-cover"
@@ -50,9 +51,9 @@ export default function AboutPage() {
           <div className="max-w-7xl mx-auto px-6 lg:px-12 w-full pb-16 pt-32">
             <p className="text-xs tracking-[0.3em] uppercase text-cream/50 mb-4">Our Story</p>
             <h1 className="font-serif text-5xl md:text-6xl text-cream leading-tight max-w-2xl">
-              Craft Is Our
+              A Saree Is Never
               <br />
-              <span className="italic font-light">Mother Tongue</span>
+              <span className="italic font-light">Just a Saree.</span>
             </h1>
           </div>
         </div>
@@ -67,16 +68,16 @@ export default function AboutPage() {
               <h2 className="section-title mb-8">Why We Started</h2>
               <div className="space-y-5 text-sm text-brown/60 leading-relaxed">
                 <p>
-                  Bhuvan Reweaves was born from a simple frustration: the impossibility of finding a well-made shirt that fit perfectly, was made ethically, and carried genuine craft.
+                  Bhuvan Reweaves began with a box of sarees. His mother's box — full of silk sarees from weddings, festivals and ordinary Sundays that had quietly accumulated over forty years.
                 </p>
                 <p>
-                  Bhuvan, the founder, grew up watching his grandmother run a small tailoring shop. The smell of fresh fabric, the sound of scissors on cloth, the quiet pride of a garment well-made — these memories became a blueprint.
+                  She would never wear them again. But she couldn't give them away either. They carried too much — the smell of jasmine, the weight of occasion, the faces of people no longer here.
                 </p>
                 <p>
-                  In 2022, after years working in fashion retail, he returned to those roots. He spent six months visiting weaver cooperatives and artisan clusters across India, building relationships before building a business.
+                  Bhuvan took one of them — a deep ruby Kanjivaram — to a tailor. Two weeks later he wore it to work. Three people stopped him before noon to ask where he got his shirt.
                 </p>
                 <p>
-                  The result is Bhuvan Reweaves — a brand that treats garments as collaborations between designer, maker, and wearer.
+                  That was 2022. Since then, we've rewoven over 500 sarees into shirts for people across India — each one carrying the memory of the person who wore it first.
                 </p>
               </div>
             </div>
@@ -84,16 +85,16 @@ export default function AboutPage() {
             <div className="relative hidden lg:block">
               <div className="relative aspect-[4/5] overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=800&q=80"
-                  alt="Fabric texture"
+                  src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=800&q=80"
+                  alt="A vibrant silk saree"
                   fill
                   className="object-cover"
                   sizes="50vw"
                 />
               </div>
               <div className="absolute -bottom-4 -left-4 bg-cream border border-beige p-6 max-w-xs shadow-sm">
-                <p className="font-serif text-3xl text-brown">2022</p>
-                <p className="text-xs text-brown/50 tracking-widest uppercase mt-1">Founded</p>
+                <p className="font-serif text-3xl text-brown">500+</p>
+                <p className="text-xs text-brown/50 tracking-widest uppercase mt-1">Sarees Rewoven</p>
               </div>
             </div>
           </div>
@@ -105,7 +106,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="mb-16">
             <p className="text-xs tracking-[0.3em] uppercase text-cream/40 mb-4">What We Believe</p>
-            <h2 className="font-serif text-4xl md:text-5xl text-cream max-w-md">Our Mission</h2>
+            <h2 className="font-serif text-4xl md:text-5xl text-cream max-w-md">Our Philosophy</h2>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {values.map((val) => (
@@ -122,8 +123,8 @@ export default function AboutPage() {
       <section className="py-24 lg:py-32 bg-cream">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="mb-16">
-            <p className="section-subtitle">How We Work</p>
-            <h2 className="section-title max-w-md">The Craftsmanship Process</h2>
+            <p className="section-subtitle">How It Works</p>
+            <h2 className="section-title max-w-md">From Your Saree to Your Shirt</h2>
           </div>
           <div className="grid md:grid-cols-4 gap-0">
             {process.map((item) => (
@@ -140,13 +141,13 @@ export default function AboutPage() {
       {/* CTA */}
       <section className="py-20 bg-beige/30 text-center">
         <div className="max-w-2xl mx-auto px-6">
-          <h2 className="font-serif text-3xl text-brown mb-4">Wear the Story</h2>
+          <h2 className="font-serif text-3xl text-brown mb-4">Ready to Reweave?</h2>
           <p className="text-sm text-brown/60 mb-8">
-            Every garment has a maker behind it. Every purchase supports a craft that spans generations.
+            Browse shirts we've made from other sarees, or start the process with yours.
           </p>
           <div className="flex justify-center gap-4 flex-wrap">
-            <Link href="/shop" className="btn-primary">Shop the Collection</Link>
-            <Link href="/customization" className="btn-outline">Customize Yours</Link>
+            <Link href="/shop" className="btn-primary">Shop Saree Shirts</Link>
+            <Link href="/customization" className="btn-outline">Send Your Saree</Link>
           </div>
         </div>
       </section>

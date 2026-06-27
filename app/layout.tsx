@@ -20,13 +20,13 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Bhuvan Reweaves — Handcrafted Shirts & Kurtas",
+  title: "Bhuvan Reweaves — Saree to Shirt",
   description:
-    "Premium handcrafted shirts and kurtas with custom tailoring. Crafted for you, tailored to perfection.",
-  keywords: "handcrafted shirts, kurtas, custom tailoring, premium Indian fashion",
+    "We transform your cherished sarees into handcrafted shirts. Silk, cotton, Kanjivaram, Banarasi — every shirt is one-of-a-kind.",
+  keywords: "saree to shirt, saree upcycle, handcrafted shirts, Indian fashion, Kanjivaram shirt, Banarasi shirt",
   openGraph: {
-    title: "Bhuvan Reweaves",
-    description: "Crafted For You, Tailored To Perfection",
+    title: "Bhuvan Reweaves — Saree to Shirt",
+    description: "Your Saree. Reborn as a Shirt.",
     type: "website",
   },
 };

@@ -3,11 +3,11 @@ import Link from "next/link";
 import { Instagram, Mail, MessageCircle } from "lucide-react";
 
 const shopLinks = [
-  { label: "All Products", href: "/shop" },
-  { label: "Formal Shirts", href: "/shop?category=formal-shirts" },
-  { label: "Printed Shirts", href: "/shop?category=printed-shirts" },
-  { label: "Short Kurtas", href: "/shop?category=short-kurtas" },
-  { label: "Long Kurtas", href: "/shop?category=long-kurtas" },
+  { label: "All Shirts", href: "/shop" },
+  { label: "Silk Saree Shirts", href: "/shop?category=silk-saree-shirts" },
+  { label: "Cotton Saree Shirts", href: "/shop?category=cotton-saree-shirts" },
+  { label: "Kanjivaram Shirts", href: "/shop?category=kanjivaram-shirts" },
+  { label: "Banarasi Shirts", href: "/shop?category=banarasi-shirts" },
   { label: "New Arrivals", href: "/shop?filter=new" },
 ];
 
@@ -33,8 +33,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-sm text-cream/60 leading-relaxed mb-8 max-w-xs">
-              Handcrafted shirts and kurtas made with precision. Each garment is
-              a story of skilled artisans and premium Indian textiles.
+              We transform cherished sarees into handcrafted shirts. Every shirt is one-of-a-kind — your saree, rewoven.
             </p>
             <div className="flex gap-4">
               <a
