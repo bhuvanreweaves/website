@@ -12,6 +12,10 @@ const nextConfig: NextConfig = {
         hostname: "plus.unsplash.com",
       },
       {
+        protocol: "https",
+        hostname: "lavenderblush-stinkbug-137043.hostingersite.com",
+      },
+      {
         protocol: "http",
         hostname: "localhost",
         port: "9000",
