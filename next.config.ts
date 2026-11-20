@@ -12,8 +12,9 @@ const nextConfig: NextConfig = {
         hostname: "plus.unsplash.com",
       },
       {
+        // Product images uploaded in the Medusa admin (Cloudflare R2)
         protocol: "https",
-        hostname: "lavenderblush-stinkbug-137043.hostingersite.com",
+        hostname: "pub-8e100fb7ad684559a0108b9f12b2d07b.r2.dev",
       },
       {
         protocol: "http",
