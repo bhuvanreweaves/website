@@ -1,11 +1,16 @@
 import type { Product, ProductCategory, Fabric, Size } from "@/data/products";
+import {
+  MEDUSA_BACKEND_URL,
+  MEDUSA_PUBLISHABLE_KEY,
+  MEDUSA_REGION_ID,
+} from "@/lib/medusa-config";
 
-const BACKEND_URL =
-  process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL || "http://localhost:9000";
-const PUB_KEY = process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY || "";
+const BACKEND_URL = MEDUSA_BACKEND_URL;
+const PUB_KEY = MEDUSA_PUBLISHABLE_KEY;
 
+// region_id makes Medusa return each variant's price in that region (INR)
 const FIELDS =
-  "fields=%2Bvariants.prices,%2Bvariants.options,%2Bvariants.options.option,%2Bimages,%2Btags,%2Bmetadata,%2Bvariants.inventory_quantity";
+  `region_id=${MEDUSA_REGION_ID}&fields=%2Bvariants.calculated_price,%2Bvariants.options,%2Bvariants.options.option,%2Bimages,%2Btags,%2Bmetadata,%2Bvariants.inventory_quantity`;
 
 async function medusaFetch(path: string) {
   const res = await fetch(`${BACKEND_URL}${path}`, {
@@ -21,8 +26,11 @@ async function medusaFetch(path: string) {
 function mapMedusaProduct(p: any): Product {
   const meta = p.metadata || {};
 
-  const firstVariant = p.variants?.[0];
-  const price = firstVariant?.prices?.[0]?.amount ?? 0;
+  // Lowest size price, in rupees (Medusa stores ₹2,949 as 2949)
+  const variantPrices: number[] = (p.variants || [])
+    .map((v: any) => v.calculated_price?.calculated_amount)
+    .filter((amount: unknown): amount is number => typeof amount === "number");
+  const price = variantPrices.length ? Math.min(...variantPrices) : 0;
 
   const sizes: Size[] = (p.variants || [])
     .map((v: any) => {

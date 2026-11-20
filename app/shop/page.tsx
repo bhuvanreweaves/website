@@ -67,7 +67,7 @@ function ShopContent() {
     if (sortBy === "price-low") result.sort((a, b) => a.price - b.price);
     if (sortBy === "price-high") result.sort((a, b) => b.price - a.price);
     return result;
-  }, [category, selectedFabrics, sortBy, priceMax]);
+  }, [products, category, selectedFabrics, sortBy, priceMax]);
 
   const toggleFabric = (fabric: Fabric) => {
     setSelectedFabrics((prev) =>
