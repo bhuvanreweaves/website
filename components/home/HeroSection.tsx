@@ -58,7 +58,7 @@ export default function HeroSection() {
             href="/shop"
             className="inline-flex items-center justify-center gap-2 bg-[#F8F5F0] text-[#2B2118] font-sans text-sm tracking-widest uppercase px-8 py-4 hover:bg-[#E8DDCF] transition-colors duration-300"
           >
-            Shop Shirts <ArrowRight size={14} />
+            Shop the Collection <ArrowRight size={14} />
           </Link>
           <Link
             href="/customization"

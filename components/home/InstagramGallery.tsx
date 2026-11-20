@@ -4,100 +4,99 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Instagram } from "lucide-react";
+import { SITE } from "@/lib/site-info";
 
-const images = [
-  {
-    src: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=500&q=80",
-    alt: "Vibrant silk saree before transformation",
-    span: "row-span-2",
+// Placeholder photos until real Instagram posts are added
+const PHOTOS = {
+  left: {
+    src: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=600&q=80",
+    alt: "A vibrant silk saree before it is rewoven",
   },
-  {
-    src: "https://images.unsplash.com/photo-1621072156002-e2fccdc0b176?w=500&q=80",
-    alt: "Finished shirt made from Kanjivaram silk",
-    span: "",
+  centre: {
+    src: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=800&q=80",
+    alt: "A saree being crafted into a shirt",
   },
-  {
-    src: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&q=80",
-    alt: "Banarasi brocade shirt detail",
-    span: "",
+  right: {
+    src: "https://images.unsplash.com/photo-1621072156002-e2fccdc0b176?w=600&q=80",
+    alt: "A finished shirt made from a Kanjivaram saree",
   },
-  {
-    src: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=500&q=80",
-    alt: "Handcrafted saree shirt worn",
-    span: "row-span-2",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=500&q=80",
-    alt: "Saree fabric detail and texture",
-    span: "",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=500&q=80",
-    alt: "Tailor working on a saree shirt",
-    span: "",
-  },
-];
+};
+
+const instagramUrl = `https://instagram.com/${SITE.instagramHandle}`;
+
+function Photo({ src, alt, className, sizes }: { src: string; alt: string; className: string; sizes: string }) {
+  return (
+    <a
+      href={instagramUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`group relative block overflow-hidden ${className}`}
+    >
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        sizes={sizes}
+        className="object-cover transition-transform duration-700 group-hover:scale-105"
+      />
+    </a>
+  );
+}
 
 export default function InstagramGallery() {
   return (
-    <section className="bg-[#F8F5F0] py-24 px-6 md:px-12">
-      <div className="max-w-7xl mx-auto">
+    <section className="bg-brown-medium px-6 py-20 md:px-12 md:py-24">
+      <div className="mx-auto grid max-w-6xl grid-cols-2 items-start gap-4 md:grid-cols-[1fr_1.35fr_1fr] md:gap-10">
+        {/* Centre: heading, button and photo (first on phones) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="text-center mb-12"
+          className="col-span-2 flex flex-col items-center text-center md:order-2 md:col-span-1"
         >
-          <p className="font-sans text-xs tracking-[0.3em] uppercase text-[#8B6352] mb-3">
-            @bhuvanreweaves
-          </p>
-          <h2 className="font-serif text-4xl text-[#2B2118]">
-            Sarees We've <em>Rewoven</em>
+          <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-cream text-brown">
+            <Instagram size={22} strokeWidth={1.75} />
+          </span>
+          <p className="mt-4 font-sans text-sm tracking-wide text-cream/85">@{SITE.instagramHandle}</p>
+          <h2 className="mt-3 font-serif text-4xl leading-tight text-cream md:text-5xl">
+            Sarees, Rewoven.
+            <br />
+            Follow the Journey.
           </h2>
-        </motion.div>
-
-        <div className="grid grid-cols-2 md:grid-cols-3 grid-rows-2 gap-3 h-[600px] md:h-[700px]">
-          {images.map((img, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, scale: 0.97 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              className={`relative overflow-hidden group ${img.span}`}
-            >
-              <Image
-                src={img.src}
-                alt={img.alt}
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-[#2B2118]/0 group-hover:bg-[#2B2118]/40 transition-colors duration-300 flex items-center justify-center">
-                <Instagram
-                  size={28}
-                  className="text-[#F8F5F0] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                />
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-center mt-10"
-        >
           <a
-            href="https://instagram.com/bhuvanreweaves"
+            href={instagramUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 font-sans text-sm tracking-widest uppercase text-[#2B2118] border-b border-[#2B2118] pb-0.5 hover:text-[#8B6352] hover:border-[#8B6352] transition-colors duration-300"
+            className="mt-7 rounded-md border border-cream/70 px-7 py-3 font-sans text-sm text-cream transition-colors hover:bg-cream hover:text-brown"
           >
-            <Instagram size={14} /> Follow on Instagram
+            Follow on Instagram
           </a>
+          <Photo
+            {...PHOTOS.centre}
+            sizes="(min-width: 768px) 30vw, 100vw"
+            className="mt-10 aspect-[4/3] w-full"
+          />
+        </motion.div>
+
+        {/* Side photos */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          className="md:order-1 md:mt-12"
+        >
+          <Photo {...PHOTOS.left} sizes="(min-width: 768px) 22vw, 50vw" className="aspect-[4/5] w-full" />
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="md:order-3 md:mt-12"
+        >
+          <Photo {...PHOTOS.right} sizes="(min-width: 768px) 22vw, 50vw" className="aspect-[4/5] w-full" />
         </motion.div>
       </div>
     </section>

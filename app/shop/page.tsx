@@ -6,7 +6,14 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { Eye, SlidersHorizontal, X } from "lucide-react";
-import { type Product, type ProductCategory, type Fabric, type Size } from "@/data/products";
+import {
+  isProductCategory,
+  productCategories,
+  type Product,
+  type ProductCategory,
+  type Fabric,
+  type Size,
+} from "@/data/products";
 import { fetchProducts } from "@/lib/medusa-api";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -22,12 +29,12 @@ function formatPrice(price: number) {
 type SortOption = "latest" | "price-low" | "price-high";
 
 const categoryOptions: { value: ProductCategory | "all"; label: string }[] = [
-  { value: "all", label: "All Shirts" },
-  { value: "silk-saree-shirts", label: "Silk Saree Shirts" },
-  { value: "cotton-saree-shirts", label: "Cotton Saree Shirts" },
-  { value: "kanjivaram-shirts", label: "Kanjivaram Shirts" },
-  { value: "banarasi-shirts", label: "Banarasi Shirts" },
+  { value: "all", label: "All Products" },
+  ...productCategories.map((c) => ({ value: c.id, label: c.name })),
 ];
+
+const categoryFromUrl = (value: string | null): ProductCategory | "all" =>
+  isProductCategory(value) ? value : "all";
 
 const fabricOptions: Fabric[] = [
   "Kanjivaram Silk",
@@ -43,14 +50,20 @@ const fabricOptions: Fabric[] = [
 function ShopContent() {
   const searchParams = useSearchParams();
   const [category, setCategory] = useState<ProductCategory | "all">(
-    (searchParams.get("category") as ProductCategory) || "all"
+    categoryFromUrl(searchParams.get("category"))
   );
   const [selectedFabrics, setSelectedFabrics] = useState<Fabric[]>([]);
   const [sortBy, setSortBy] = useState<SortOption>("latest");
   const [filterOpen, setFilterOpen] = useState(false);
-  const [priceMax, setPriceMax] = useState(6000);
+  // null = no price limit
+  const [priceMax, setPriceMax] = useState<number | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+
+  // Follow category links (menu, footer) while already on this page
+  useEffect(() => {
+    setCategory(categoryFromUrl(searchParams.get("category")));
+  }, [searchParams]);
 
   useEffect(() => {
     fetchProducts()
@@ -58,12 +71,18 @@ function ShopContent() {
       .finally(() => setLoading(false));
   }, []);
 
+  // Price slider ends at the most expensive product, rounded up to ₹500
+  const highestPrice = useMemo(
+    () => Math.ceil(Math.max(5000, ...products.map((p) => p.price)) / 500) * 500,
+    [products]
+  );
+
   const filtered = useMemo(() => {
     let result = [...products];
     if (category !== "all") result = result.filter((p) => p.category === category);
     if (selectedFabrics.length > 0)
       result = result.filter((p) => selectedFabrics.includes(p.fabric));
-    result = result.filter((p) => p.price <= priceMax);
+    if (priceMax !== null) result = result.filter((p) => p.price <= priceMax);
     if (sortBy === "price-low") result.sort((a, b) => a.price - b.price);
     if (sortBy === "price-high") result.sort((a, b) => b.price - a.price);
     return result;
@@ -86,7 +105,7 @@ function ShopContent() {
         >
           <p className="section-subtitle">Our Store</p>
           <h1 className="font-serif text-4xl md:text-5xl text-brown">
-            Shirts from Sarees
+            Handcrafted from Sarees
           </h1>
         </motion.div>
       </div>
@@ -107,7 +126,9 @@ function ShopContent() {
                 </span>
               )}
             </button>
-            <span className="text-xs text-brown/40">{filtered.length} Products</span>
+            <span className="text-xs text-brown/40">
+              {filtered.length} {filtered.length === 1 ? "Product" : "Products"}
+            </span>
           </div>
 
           {/* Sort */}
@@ -199,20 +220,23 @@ function ShopContent() {
               {/* Price */}
               <div>
                 <p className="text-xs tracking-widest uppercase text-brown/50 mb-4">
-                  Max Price: {formatPrice(priceMax)}
+                  Max Price: {priceMax === null ? "Any" : formatPrice(priceMax)}
                 </p>
                 <input
                   type="range"
                   min={1000}
-                  max={5000}
+                  max={highestPrice}
                   step={500}
-                  value={priceMax}
-                  onChange={(e) => setPriceMax(Number(e.target.value))}
+                  value={priceMax ?? highestPrice}
+                  onChange={(e) => {
+                    const value = Number(e.target.value);
+                    setPriceMax(value >= highestPrice ? null : value);
+                  }}
                   className="w-full accent-brown"
                 />
                 <div className="flex justify-between text-xs text-brown/40 mt-1">
                   <span>₹1,000</span>
-                  <span>₹5,000</span>
+                  <span>{formatPrice(highestPrice)}</span>
                 </div>
               </div>
             </motion.aside>
@@ -238,7 +262,7 @@ function ShopContent() {
                   onClick={() => {
                     setCategory("all");
                     setSelectedFabrics([]);
-                    setPriceMax(5000);
+                    setPriceMax(null);
                   }}
                   className="mt-4 text-xs tracking-widest uppercase text-brown/50 hover:text-brown transition-colors underline"
                 >

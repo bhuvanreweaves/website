@@ -4,6 +4,8 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Toaster } from "@/components/ui/toaster";
+import { CartProvider } from "@/components/cart/CartProvider";
+import CartDrawer from "@/components/cart/CartDrawer";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -19,14 +21,25 @@ const dmSans = DM_Sans({
   display: "swap",
 });
 
+// Browser tab icons come from app/favicon.ico, app/icon.png and app/apple-icon.png
 export const metadata: Metadata = {
-  title: "Bhuvan Reweaves — Saree to Shirt",
+  metadataBase: new URL("https://www.bhuvanreweaves.com"),
+  applicationName: "Bhuvan Reweaves",
+  title: {
+    default: "Bhuvan Reweaves — Handcrafted from Sarees",
+    // Pages set their own title, e.g. "About Us | Bhuvan Reweaves"
+    template: "%s | Bhuvan Reweaves",
+  },
   description:
-    "We transform your cherished sarees into handcrafted shirts. Silk, cotton, Kanjivaram, Banarasi — every shirt is one-of-a-kind.",
-  keywords: "saree to shirt, saree upcycle, handcrafted shirts, Indian fashion, Kanjivaram shirt, Banarasi shirt",
+    "Shirts, kurtas, Thalaivan x Thalaivi couple sets and dhotis, handcrafted from Indian sarees — silk, cotton, Kanjivaram and Banarasi. Shop one-of-a-kind pieces, or send us your own saree.",
+  keywords:
+    "saree to shirt, shirts from sarees, saree kurta, couple set, Thalaivan Thalaivi, saree dhoti, saree upcycling, handcrafted shirts, Kanjivaram shirt, Banarasi shirt",
   openGraph: {
-    title: "Bhuvan Reweaves — Saree to Shirt",
-    description: "Your Saree. Reborn as a Shirt.",
+    title: "Bhuvan Reweaves — Handcrafted from Sarees",
+    description: "Your saree, given a new life. Handcrafted, one of a kind.",
+    siteName: "Bhuvan Reweaves",
+    locale: "en_IN",
+    url: "/",
     type: "website",
   },
 };
@@ -39,10 +52,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${cormorant.variable} ${dmSans.variable}`}>
       <body>
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
-        <Toaster />
+        <CartProvider>
+          <Navbar />
+          {/* pt-8 = height of the announcement bar above the fixed header */}
+          <main className="pt-8">{children}</main>
+          <Footer />
+          <CartDrawer />
+          <Toaster />
+        </CartProvider>
       </body>
     </html>
   );

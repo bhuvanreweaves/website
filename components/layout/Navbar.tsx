@@ -3,11 +3,14 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { ShoppingBag, Menu, Search, X } from "lucide-react";
+import { Bookmark, ShoppingBag, Menu, Search, User, X } from "lucide-react";
 import MobileMenu from "./MobileMenu";
+import BrandLogo from "./BrandLogo";
+import AnnouncementBar from "./AnnouncementBar";
+import { useCart } from "@/components/cart/CartProvider";
 
 const navLinks = [
-  { label: "Shop Shirts", href: "/shop" },
+  { label: "Shop", href: "/shop" },
   { label: "Send Your Saree", href: "/customization" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
@@ -16,6 +19,7 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { itemCount, openCart } = useCart();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -31,16 +35,17 @@ export default function Navbar() {
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         className="fixed top-0 left-0 right-0 z-40 bg-[#F8F5F0] border-b border-[#E8DDCF]"
       >
+        {/* 32px tall; <main> in app/layout.tsx is padded by the same amount */}
+        <AnnouncementBar />
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="flex items-center justify-between h-18 py-4">
             {/* Logo */}
-            <Link href="/" className="flex flex-col leading-none group">
-              <span className="font-serif text-xl text-brown tracking-wide group-hover:opacity-80 transition-opacity">
-                Bhuvan
-              </span>
-              <span className="font-sans text-[9px] tracking-[0.3em] uppercase text-brown-medium">
-                Reweaves
-              </span>
+            <Link
+              href="/"
+              aria-label="Bhuvan Reweaves home"
+              className="hover:opacity-80 transition-opacity"
+            >
+              <BrandLogo priority />
             </Link>
 
             {/* Desktop Nav */}
@@ -58,20 +63,39 @@ export default function Navbar() {
             </nav>
 
             {/* Right Icons */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-5">
+              {/* Search, Wishlist and Account aren't built yet; they show on
+                  larger screens only, where there is room next to the logo */}
               <button
                 aria-label="Search"
                 className="hidden md:flex text-brown/60 hover:text-brown transition-colors"
               >
                 <Search size={18} strokeWidth={1.5} />
               </button>
-              <Link
-                href="/shop"
-                aria-label="Cart"
+              <button
+                aria-label="Wishlist"
+                className="hidden md:flex text-brown/60 hover:text-brown transition-colors"
+              >
+                <Bookmark size={18} strokeWidth={1.5} />
+              </button>
+              <button
+                aria-label="Account"
+                className="hidden md:flex text-brown/60 hover:text-brown transition-colors"
+              >
+                <User size={18} strokeWidth={1.5} />
+              </button>
+              <button
+                onClick={openCart}
+                aria-label={itemCount ? `Cart, ${itemCount} ${itemCount === 1 ? "item" : "items"}` : "Cart"}
                 className="relative text-brown/60 hover:text-brown transition-colors"
               >
                 <ShoppingBag size={18} strokeWidth={1.5} />
-              </Link>
+                {itemCount > 0 && (
+                  <span className="absolute -top-1.5 -right-2 min-w-4 h-4 px-1 rounded-full bg-brown text-cream text-[9px] leading-4 text-center">
+                    {itemCount}
+                  </span>
+                )}
+              </button>
               <button
                 aria-label="Open menu"
                 className="md:hidden text-brown"

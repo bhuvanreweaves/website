@@ -20,15 +20,15 @@ const features = [
   },
   {
     number: "03",
-    title: "Master Tailors",
+    title: "Master Craftspeople",
     subtitle: "Decades of craft.",
     description:
-      "Our tailors have spent decades working with delicate Indian textiles. They know how silk behaves, how to cut without waste, how to preserve the weave direction.",
+      "Our craftspeople have spent decades working with delicate Indian textiles. They know how silk behaves, how to cut without waste, how to preserve the weave direction.",
   },
   {
     number: "04",
     title: "Pan India Shipping",
-    subtitle: "Free above ₹2,000.",
+    subtitle: "Free across India.",
     description:
       "We pick up your saree and deliver your finished shirt anywhere in India. Carefully packed, insured, and tracked at every step.",
   },

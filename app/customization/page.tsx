@@ -6,6 +6,7 @@ import { Upload, Ruler, Palette, MessageSquare, CheckCircle, X, ArrowRight, Arro
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { SITE } from "@/lib/site-info";
 
 const steps = [
   { id: 1, label: "Inspiration", icon: Upload },
@@ -106,7 +107,7 @@ export default function CustomizationPage() {
           </p>
           <div className="bg-beige/50 p-4 mb-8">
             <p className="text-xs tracking-widest uppercase text-brown/40 mb-2">Estimated Turnaround</p>
-            <p className="font-serif text-xl text-brown">10–14 Business Days</p>
+            <p className="font-serif text-xl text-brown">5–7 Working Days</p>
           </div>
           <button
             onClick={() => { setSubmitted(false); setCurrentStep(1); }}
@@ -128,7 +129,7 @@ export default function CustomizationPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <p className="section-subtitle">Bespoke Tailoring</p>
+          <p className="section-subtitle">Made from Your Saree</p>
           <h1 className="font-serif text-4xl md:text-5xl text-brown mb-2">
             Customize Your Garment
           </h1>
@@ -278,8 +279,8 @@ export default function CustomizationPage() {
               <div className="mt-8 p-4 bg-beige/40 max-w-xl">
                 <p className="text-xs text-brown/50">
                   <strong className="text-brown">Need help measuring?</strong> Our team can guide you via WhatsApp. Contact us at{" "}
-                  <a href="https://wa.me/919876543210" className="underline hover:text-brown">
-                    +91 98765 43210
+                  <a href={`https://wa.me/${SITE.whatsappNumber}`} className="underline hover:text-brown">
+                    {SITE.phoneDisplay}
                   </a>
                 </p>
               </div>
@@ -427,7 +428,7 @@ export default function CustomizationPage() {
 
                 <div className="border border-beige p-5 bg-beige/20">
                   <p className="text-xs tracking-widest uppercase text-brown/40 mb-2">Estimated Timeline</p>
-                  <p className="font-serif text-xl text-brown">10–14 Business Days</p>
+                  <p className="font-serif text-xl text-brown">5–7 Working Days</p>
                   <p className="text-xs text-brown/40 mt-1">
                     Our team will confirm exact timeline after reviewing your request
                   </p>

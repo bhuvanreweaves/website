@@ -4,7 +4,8 @@ import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About Us — Bhuvan Reweaves",
+  // The site name is added by the title template in app/layout.tsx
+  title: "About Us",
   description: "The story behind Bhuvan Reweaves — turning cherished sarees into handcrafted shirts.",
 };
 
@@ -22,14 +23,14 @@ const values = [
   {
     title: "One Shirt at a Time",
     description:
-      "We don't run factories. We run a workshop. Each shirt is cut and sewn individually, by a tailor who understands the specific saree they are working with — its drape, its weave, its weight.",
+      "We don't run factories. We run a workshop. Each shirt is cut and sewn individually, by a craftsperson who understands the specific saree they are working with — its drape, its weave, its weight.",
   },
 ];
 
 const process = [
   { step: "01", title: "You Send the Saree", description: "Post your saree to us or drop it off in person. Silk, cotton, Kanjivaram, Banarasi — any saree works." },
-  { step: "02", title: "We Consult", description: "Our tailor reviews the saree with you — fabric width, pattern placement, what to preserve and how." },
-  { step: "03", title: "We Craft", description: "The saree is carefully cut and tailored into your shirt, preserving borders and patterns exactly where they belong." },
+  { step: "02", title: "We Consult", description: "Our team reviews the saree with you — fabric width, pattern placement, what to preserve and how." },
+  { step: "03", title: "We Craft", description: "The saree is carefully cut and stitched into your shirt, preserving borders and patterns exactly where they belong." },
   { step: "04", title: "Delivered Home", description: "Your shirt — and any leftover fabric — is shipped back to you, carefully packed, within 14 days." },
 ];
 
@@ -40,7 +41,7 @@ export default function AboutPage() {
       <section className="relative h-[60vh] min-h-[400px] overflow-hidden">
         <Image
           src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=1400&q=80"
-          alt="A tailor carefully cutting a saree"
+          alt="A saree being carefully cut by hand"
           fill
           priority
           className="object-cover"
@@ -74,7 +75,7 @@ export default function AboutPage() {
                   She would never wear them again. But she couldn't give them away either. They carried too much — the smell of jasmine, the weight of occasion, the faces of people no longer here.
                 </p>
                 <p>
-                  Bhuvan took one of them — a deep ruby Kanjivaram — to a tailor. Two weeks later he wore it to work. Three people stopped him before noon to ask where he got his shirt.
+                  Bhuvan had one of them — a deep ruby Kanjivaram — made into a shirt. Two weeks later he wore it to work. Three people stopped him before noon to ask where he got his shirt.
                 </p>
                 <p>
                   That was 2022. Since then, we've rewoven over 500 sarees into shirts for people across India — each one carrying the memory of the person who wore it first.

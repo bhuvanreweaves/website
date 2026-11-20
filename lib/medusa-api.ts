@@ -1,16 +1,24 @@
-import type { Product, ProductCategory, Fabric, Size } from "@/data/products";
+import {
+  isProductCategory,
+  type Product,
+  type ProductCategory,
+  type ProductVariant,
+  type Fabric,
+  type Size,
+} from "@/data/products";
 import {
   MEDUSA_BACKEND_URL,
   MEDUSA_PUBLISHABLE_KEY,
   MEDUSA_REGION_ID,
 } from "@/lib/medusa-config";
+import { SHIPPING_SUMMARY } from "@/lib/site-info";
 
 const BACKEND_URL = MEDUSA_BACKEND_URL;
 const PUB_KEY = MEDUSA_PUBLISHABLE_KEY;
 
 // region_id makes Medusa return each variant's price in that region (INR)
 const FIELDS =
-  `region_id=${MEDUSA_REGION_ID}&fields=%2Bvariants.calculated_price,%2Bvariants.options,%2Bvariants.options.option,%2Bimages,%2Btags,%2Bmetadata,%2Bvariants.inventory_quantity`;
+  `region_id=${MEDUSA_REGION_ID}&fields=%2Bvariants.calculated_price,*categories,%2Bvariants.options,%2Bvariants.options.option,%2Bimages,%2Btags,%2Bmetadata,%2Bvariants.inventory_quantity`;
 
 async function medusaFetch(path: string) {
   const res = await fetch(`${BACKEND_URL}${path}`, {
@@ -26,22 +34,20 @@ async function medusaFetch(path: string) {
 function mapMedusaProduct(p: any): Product {
   const meta = p.metadata || {};
 
-  // Lowest size price, in rupees (Medusa stores ₹2,949 as 2949)
-  const variantPrices: number[] = (p.variants || [])
-    .map((v: any) => v.calculated_price?.calculated_amount)
-    .filter((amount: unknown): amount is number => typeof amount === "number");
-  const price = variantPrices.length ? Math.min(...variantPrices) : 0;
-
-  const sizes: Size[] = (p.variants || [])
-    .map((v: any) => {
-      const opt = v.options?.find(
-        (o: any) =>
-          o.option?.title?.toLowerCase() === "size" ||
-          o.option_value?.toLowerCase() !== undefined
-      );
-      return (opt?.value || v.title) as Size;
-    })
-    .filter(Boolean);
+  // One entry per Medusa variant: its ID (for the cart), size and price.
+  // Prices are in rupees (Medusa stores ₹2,949 as 2949).
+  const variants: ProductVariant[] = (p.variants || []).map((v: any) => {
+    const sizeOption = v.options?.find((o: any) => o.option?.title?.toLowerCase() === "size");
+    return {
+      id: v.id,
+      size: (sizeOption?.value as Size) ?? null,
+      price: v.calculated_price?.calculated_amount ?? 0,
+    };
+  });
+  const pricedVariants = variants.filter((v) => v.price > 0);
+  // Lowest size price, shown on product cards
+  const price = pricedVariants.length ? Math.min(...pricedVariants.map((v) => v.price)) : 0;
+  const sizes: Size[] = variants.map((v) => v.size).filter((s): s is Size => s !== null);
 
   const images: string[] = [];
   if (p.thumbnail) images.push(p.thumbnail);
@@ -51,7 +57,11 @@ function mapMedusaProduct(p: any): Product {
 
   const tags: string[] = (p.tags || []).map((t: any) => t.value as string);
 
-  const category = (meta.category || tags[0] || "silk-saree-shirts") as ProductCategory;
+  // The category chosen in the Medusa admin (first one if several)
+  const medusaCategory = (p.categories || [])
+    .map((c: any) => c.handle)
+    .find(isProductCategory);
+  const category: ProductCategory = medusaCategory ?? "shirts";
 
   return {
     id: p.id,
@@ -65,8 +75,9 @@ function mapMedusaProduct(p: any): Product {
     careInstructions:
       meta.care_instructions || "Dry clean recommended.",
     shippingInfo:
-      meta.shipping_info || "Ships in 10–14 business days. Free shipping above ₹2,000.",
-    sizes: sizes.length > 0 ? sizes : ["S", "M", "L", "XL"],
+      meta.shipping_info || SHIPPING_SUMMARY,
+    sizes,
+    variants,
     images,
     isNew: meta.is_new === "true",
     isBestseller: meta.is_bestseller === "true",

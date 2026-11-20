@@ -7,11 +7,12 @@ import { notFound } from "next/navigation";
 import { motion } from "framer-motion";
 import { Minus, Plus, ShoppingBag, Zap, ArrowLeft, Share2 } from "lucide-react";
 import { use } from "react";
-import { type Product, type Size } from "@/data/products";
+import { getCategoryName, type Product, type Size } from "@/data/products";
 import { fetchProductBySlug } from "@/lib/medusa-api";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useCart } from "@/components/cart/CartProvider";
 
 function formatPrice(price: number) {
   return new Intl.NumberFormat("en-IN", {
@@ -31,7 +32,7 @@ export default function ProductPage({
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedSize, setSelectedSize] = useState<Size | null>(null);
   const [quantity, setQuantity] = useState(1);
-  const [addedToCart, setAddedToCart] = useState(false);
+  const { addItem, busy: cartBusy } = useCart();
 
   useEffect(() => {
     fetchProductBySlug(slug).then((medusaProduct) => {
@@ -46,13 +47,17 @@ export default function ProductPage({
     </div>
   );
 
-  const handleAddToCart = () => {
-    if (!selectedSize) {
-      alert("Please select a size");
-      return;
-    }
-    setAddedToCart(true);
-    setTimeout(() => setAddedToCart(false), 2000);
+  // Products without sizes have a single variant and skip the size picker
+  const needsSize = product.sizes.length > 0;
+  const selectedVariant = product.variants?.find((v) =>
+    needsSize ? v.size === selectedSize : true
+  );
+  const canAddToCart = !!selectedVariant && !cartBusy;
+  const displayPrice = selectedVariant?.price || product.price;
+
+  // Adds the chosen size to the cart and opens the cart drawer
+  const handleAddToCart = async () => {
+    if (selectedVariant) await addItem(selectedVariant.id, quantity);
   };
 
   return (
@@ -68,7 +73,7 @@ export default function ProductPage({
             href={`/shop?category=${product.category}`}
             className="hover:text-brown transition-colors"
           >
-            {product.category.replace(/-/g, " ")}
+            {getCategoryName(product.category)}
           </Link>
           <span>/</span>
           <span className="text-brown truncate max-w-40">{product.name}</span>
@@ -136,7 +141,7 @@ export default function ProductPage({
           >
             <div className="flex items-center justify-between mb-4">
               <p className="text-xs tracking-widest uppercase text-brown/40">
-                {product.category.replace(/-/g, " ")}
+                {getCategoryName(product.category)}
               </p>
               <button className="text-brown/30 hover:text-brown transition-colors">
                 <Share2 size={14} strokeWidth={1.5} />
@@ -150,7 +155,7 @@ export default function ProductPage({
             {/* Price */}
             <div className="flex items-baseline gap-3 mb-6">
               <span className="font-serif text-2xl text-brown">
-                {formatPrice(product.price)}
+                {formatPrice(displayPrice)}
               </span>
               {product.originalPrice && (
                 <span className="text-sm text-brown/40 line-through">
@@ -164,6 +169,7 @@ export default function ProductPage({
             </p>
 
             {/* Size Selection */}
+            {needsSize && (
             <div className="mb-6">
               <div className="flex items-center justify-between mb-3">
                 <p className="text-xs tracking-widest uppercase text-brown/60">Select Size</p>
@@ -190,6 +196,7 @@ export default function ProductPage({
                 <p className="text-xs text-brown/40 mt-2">Please select a size to continue</p>
               )}
             </div>
+            )}
 
             {/* Quantity */}
             <div className="mb-8">
@@ -224,15 +231,16 @@ export default function ProductPage({
               <Button
                 onClick={handleAddToCart}
                 className="flex-1 flex items-center justify-center gap-2"
-                disabled={!selectedSize}
+                disabled={!canAddToCart}
               >
                 <ShoppingBag size={14} strokeWidth={1.5} />
-                {addedToCart ? "Added to Cart!" : "Add to Cart"}
+                {cartBusy ? "Adding…" : "Add to Cart"}
               </Button>
               <Button
+                onClick={handleAddToCart}
                 variant="outline"
                 className="flex-1 flex items-center justify-center gap-2"
-                disabled={!selectedSize}
+                disabled={!canAddToCart}
               >
                 <Zap size={14} strokeWidth={1.5} />
                 Buy Now
@@ -244,7 +252,7 @@ export default function ProductPage({
               href="/customization"
               className="block text-center py-3 border border-dashed border-warm-beige text-xs tracking-widest uppercase text-brown/50 hover:border-brown hover:text-brown transition-colors"
             >
-              Want it custom tailored? → Start Here
+              Have a saree of your own? → Turn it into a shirt
             </Link>
           </motion.div>
         </div>

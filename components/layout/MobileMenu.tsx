@@ -4,15 +4,17 @@ import React from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowRight } from "lucide-react";
+import BrandLogo from "./BrandLogo";
+import { productCategories } from "@/data/products";
 
 const menuLinks = [
   { label: "Home", href: "/" },
-  { label: "Products", href: "/shop" },
-  { label: "New Arrivals", href: "/shop?filter=new" },
+  { label: "Shop All", href: "/shop" },
+  ...productCategories.map((c) => ({ label: c.name, href: `/shop?category=${c.id}` })),
   { label: "Customization", href: "/customization" },
   { label: "About Us", href: "/about" },
   { label: "Contact", href: "/contact" },
-  { label: "Return & Exchange", href: "/returns" },
+  { label: "Returns & Refunds", href: "/returns" },
 ];
 
 interface MobileMenuProps {
@@ -45,11 +47,8 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
           >
             {/* Header */}
             <div className="flex items-center justify-between px-8 py-6 border-b border-beige">
-              <Link href="/" onClick={onClose} className="flex flex-col leading-none">
-                <span className="font-serif text-lg text-brown tracking-wide">Bhuvan</span>
-                <span className="font-sans text-[8px] tracking-[0.3em] uppercase text-brown-medium">
-                  Reweaves
-                </span>
+              <Link href="/" onClick={onClose} aria-label="Bhuvan Reweaves home">
+                <BrandLogo size="sm" />
               </Link>
               <button
                 onClick={onClose}

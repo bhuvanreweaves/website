@@ -20,7 +20,7 @@ const steps = [
   {
     icon: Scissors,
     title: "We Craft Your Shirt",
-    desc: "Our tailors cut, sew and finish your shirt — preserving the saree's patterns and borders.",
+    desc: "We cut, sew and finish your shirt by hand — preserving the saree's patterns and borders.",
   },
   {
     icon: Truck,
@@ -45,7 +45,7 @@ export default function CustomTailoring() {
             <div className="relative aspect-[4/5] overflow-hidden">
               <Image
                 src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=800&q=80"
-                alt="Tailor crafting a shirt from a saree"
+                alt="A shirt being crafted from a saree"
                 fill
                 className="object-cover"
               />
@@ -53,13 +53,13 @@ export default function CustomTailoring() {
             </div>
             {/* Overlay card */}
             <div className="absolute -bottom-6 -right-6 bg-[#F8F5F0] p-6 max-w-[200px]">
-              <p className="font-serif text-3xl text-[#2B2118]">10–14</p>
+              <p className="font-serif text-3xl text-[#2B2118]">5–7</p>
               <p className="font-sans text-xs tracking-widest uppercase text-[#8B6352] mt-1">
-                Days Turnaround
+                Working Days
               </p>
               <div className="w-8 h-px bg-[#8B6352] mt-3" />
               <p className="font-sans text-[11px] text-[#5C4033] mt-2">
-                Including shipping both ways
+                From when your saree reaches us
               </p>
             </div>
           </motion.div>

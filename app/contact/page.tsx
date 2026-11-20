@@ -6,6 +6,7 @@ import { MessageCircle, Mail, Instagram, Phone } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { SITE } from "@/lib/site-info";
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -128,22 +129,22 @@ export default function ContactPage() {
                   {
                     icon: MessageCircle,
                     label: "WhatsApp",
-                    value: "+91 98765 43210",
-                    href: "https://wa.me/919876543210",
+                    value: SITE.phoneDisplay,
+                    href: `https://wa.me/${SITE.whatsappNumber}`,
                     note: "Fastest response — usually within 1-2 hours",
                   },
                   {
                     icon: Mail,
                     label: "Email",
-                    value: "hello@bhuvanreweaves.com",
-                    href: "mailto:hello@bhuvanreweaves.com",
+                    value: SITE.email,
+                    href: `mailto:${SITE.email}`,
                     note: "For detailed inquiries and orders",
                   },
                   {
                     icon: Instagram,
                     label: "Instagram",
-                    value: "@bhuvanreweaves",
-                    href: "https://instagram.com/bhuvanreweaves",
+                    value: `@${SITE.instagramHandle}`,
+                    href: `https://instagram.com/${SITE.instagramHandle}`,
                     note: "Follow for behind-the-scenes content",
                   },
                 ].map((contact) => (
@@ -186,6 +187,18 @@ export default function ContactPage() {
                   <span className="text-brown">11 AM – 5 PM IST</span>
                 </div>
               </div>
+            </div>
+
+            {/* Business details */}
+            <div className="border-t border-beige pt-8">
+              <h4 className="text-xs tracking-widest uppercase text-brown/50 mb-4">
+                Business Address
+              </h4>
+              <p className="text-sm text-brown">{SITE.legalName}</p>
+              <p className="text-sm text-brown/60 mt-1">{SITE.address}</p>
+              {SITE.gstin && (
+                <p className="text-sm text-brown/60 mt-1">GSTIN: {SITE.gstin}</p>
+              )}
             </div>
           </motion.div>
         </div>

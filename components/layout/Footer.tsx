@@ -1,163 +1,109 @@
 import React from "react";
 import Link from "next/link";
 import { Instagram, Mail, MessageCircle } from "lucide-react";
+import BrandLogo from "./BrandLogo";
+import NewsletterForm from "./NewsletterForm";
+import BackToTop from "./BackToTop";
+import { POLICY_LINKS } from "@/components/legal/LegalPage";
+import { SITE } from "@/lib/site-info";
+import { productCategories } from "@/data/products";
 
-const shopLinks = [
-  { label: "All Shirts", href: "/shop" },
-  { label: "Silk Saree Shirts", href: "/shop?category=silk-saree-shirts" },
-  { label: "Cotton Saree Shirts", href: "/shop?category=cotton-saree-shirts" },
-  { label: "Kanjivaram Shirts", href: "/shop?category=kanjivaram-shirts" },
-  { label: "Banarasi Shirts", href: "/shop?category=banarasi-shirts" },
-  { label: "New Arrivals", href: "/shop?filter=new" },
+const columns = [
+  {
+    title: "The Brand",
+    links: [
+      { label: "About", href: "/about" },
+      { label: "Send Your Saree", href: "/customization" },
+      { label: "Contact", href: "/contact" },
+    ],
+  },
+  { title: "Legal", links: POLICY_LINKS },
+  {
+    title: "Shop",
+    links: [
+      { label: "All Products", href: "/shop" },
+      ...productCategories.map((c) => ({ label: c.name, href: `/shop?category=${c.id}` })),
+    ],
+  },
 ];
 
-const companyLinks = [
-  { label: "About Us", href: "/about" },
-  { label: "Customization", href: "/customization" },
-  { label: "Contact", href: "/contact" },
-  { label: "Return & Exchange", href: "/returns" },
+const socials = [
+  { label: "Instagram", href: `https://instagram.com/${SITE.instagramHandle}`, icon: Instagram },
+  { label: "WhatsApp", href: `https://wa.me/${SITE.whatsappNumber}`, icon: MessageCircle },
+  { label: "Email", href: `mailto:${SITE.email}`, icon: Mail },
 ];
 
 export default function Footer() {
   return (
     <footer className="bg-brown text-cream">
-      {/* Main Footer */}
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* Brand */}
-          <div className="lg:col-span-1">
-            <div className="mb-6">
-              <div className="font-serif text-2xl tracking-wide">Bhuvan</div>
-              <div className="font-sans text-[9px] tracking-[0.3em] uppercase text-cream/50">
-                Reweaves
-              </div>
+      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-12 lg:py-20">
+        <div className="grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-8">
+          {/* Newsletter + social */}
+          <div className="lg:col-span-5">
+            <div className="mb-8">
+              <BrandLogo tone="cream" size="md" />
             </div>
-            <p className="text-sm text-cream/60 leading-relaxed mb-8 max-w-xs">
-              We transform cherished sarees into handcrafted shirts. Every shirt is one-of-a-kind — your saree, rewoven.
+            <p className="mb-5 text-[11px] uppercase tracking-[0.25em] text-cream/80">
+              Be the first to know about new collections and drops.
             </p>
-            <div className="flex gap-4">
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 border border-cream/20 flex items-center justify-center hover:bg-cream hover:text-brown transition-all"
-                aria-label="Instagram"
-              >
-                <Instagram size={14} />
-              </a>
-              <a
-                href="https://wa.me/919876543210"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 border border-cream/20 flex items-center justify-center hover:bg-cream hover:text-brown transition-all"
-                aria-label="WhatsApp"
-              >
-                <MessageCircle size={14} />
-              </a>
-              <a
-                href="mailto:hello@bhuvanreweaves.com"
-                className="w-8 h-8 border border-cream/20 flex items-center justify-center hover:bg-cream hover:text-brown transition-all"
-                aria-label="Email"
-              >
-                <Mail size={14} />
-              </a>
-            </div>
-          </div>
-
-          {/* Shop */}
-          <div>
-            <h4 className="text-xs tracking-widest uppercase text-cream/40 mb-6">
-              Shop
-            </h4>
-            <ul className="flex flex-col gap-3">
-              {shopLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-cream/70 hover:text-cream transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company */}
-          <div>
-            <h4 className="text-xs tracking-widest uppercase text-cream/40 mb-6">
-              Company
-            </h4>
-            <ul className="flex flex-col gap-3">
-              {companyLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-cream/70 hover:text-cream transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h4 className="text-xs tracking-widest uppercase text-cream/40 mb-6">
-              Get In Touch
-            </h4>
-            <div className="flex flex-col gap-4">
-              <div>
-                <p className="text-xs text-cream/40 uppercase tracking-wider mb-1">
-                  WhatsApp
-                </p>
+            <NewsletterForm />
+            <div className="mt-6 flex items-center gap-5">
+              {socials.map(({ label, href, icon: Icon }) => (
                 <a
-                  href="https://wa.me/919876543210"
-                  className="text-sm text-cream/70 hover:text-cream transition-colors"
+                  key={label}
+                  href={href}
+                  target={href.startsWith("http") ? "_blank" : undefined}
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="text-cream/80 transition-colors hover:text-cream"
                 >
-                  +91 98765 43210
+                  <Icon size={20} strokeWidth={1.5} />
                 </a>
-              </div>
-              <div>
-                <p className="text-xs text-cream/40 uppercase tracking-wider mb-1">
-                  Email
-                </p>
-                <a
-                  href="mailto:hello@bhuvanreweaves.com"
-                  className="text-sm text-cream/70 hover:text-cream transition-colors"
-                >
-                  hello@bhuvanreweaves.com
-                </a>
-              </div>
-              <div>
-                <p className="text-xs text-cream/40 uppercase tracking-wider mb-1">
-                  Shipping
-                </p>
-                <p className="text-sm text-cream/60">Pan India · Free above ₹2000</p>
-              </div>
+              ))}
             </div>
+            <p className="mt-5 text-xs text-cream/50">
+              <a href={`https://wa.me/${SITE.whatsappNumber}`} className="hover:text-cream">
+                {SITE.phoneDisplay}
+              </a>
+              <span className="mx-2">·</span>
+              <a href={`mailto:${SITE.email}`} className="hover:text-cream">
+                {SITE.email}
+              </a>
+            </p>
+          </div>
+
+          {/* Link columns */}
+          <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:col-span-7">
+            {columns.map((col) => (
+              <nav key={col.title} aria-label={col.title}>
+                <h4 className="mb-5 text-[11px] uppercase tracking-[0.25em] text-cream/50">
+                  {col.title}
+                </h4>
+                <ul className="flex flex-col gap-3">
+                  {col.links.map((link) => (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        className="text-sm uppercase tracking-wide text-cream/85 transition-colors hover:text-cream"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* Bottom Bar */}
+      {/* Bottom bar */}
       <div className="border-t border-cream/10">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-cream/30">
-            © 2025 Bhuvan Reweaves. All rights reserved.
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-5 lg:px-12">
+          <p className="text-xs text-cream/50">
+            Copyright © {new Date().getFullYear()} {SITE.name}. All rights reserved.
           </p>
-          <div className="flex gap-6">
-            {["Privacy Policy", "Terms of Service"].map((item) => (
-              <a
-                key={item}
-                href="#"
-                className="text-xs text-cream/30 hover:text-cream/60 transition-colors"
-              >
-                {item}
-              </a>
-            ))}
-          </div>
+          <BackToTop />
         </div>
       </div>
     </footer>
