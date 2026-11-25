@@ -79,7 +79,8 @@ export default function TermsPage() {
 
       <h2>Shipping, cancellations and returns</h2>
       <p>
-        We ship free across India and deliver within {POLICY.deliveryTime}. We do not accept
+        We ship free across India and deliver within {POLICY.deliveryTime}. International shipping
+        is available, and shipping charges apply. We do not accept
         returns or exchanges. Orders can be cancelled within {POLICY.cancellationWindow}, and
         damaged, defective or wrong items must be reported within {POLICY.damageReportWindow} of
         delivery. Full details are in our <Link href="/shipping-policy">Shipping Policy</Link> and{" "}

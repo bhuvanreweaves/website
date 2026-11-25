@@ -54,8 +54,7 @@ export default function RootLayout({
       <body>
         <CartProvider>
           <Navbar />
-          {/* pt-8 = height of the announcement bar above the fixed header */}
-          <main className="pt-8">{children}</main>
+          <main>{children}</main>
           <Footer />
           <CartDrawer />
           <Toaster />

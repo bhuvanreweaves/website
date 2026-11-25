@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Minus, Plus, ShoppingBag, Zap, ArrowLeft, Share2 } from "lucide-react";
 import { use } from "react";
@@ -13,6 +13,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useCart } from "@/components/cart/CartProvider";
+import { SizeGuide } from "@/components/product/SizeGuide";
 
 function formatPrice(price: number) {
   return new Intl.NumberFormat("en-IN", {
@@ -32,7 +33,8 @@ export default function ProductPage({
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedSize, setSelectedSize] = useState<Size | null>(null);
   const [quantity, setQuantity] = useState(1);
-  const { addItem, busy: cartBusy } = useCart();
+  const { addItem, closeCart, busy: cartBusy } = useCart();
+  const router = useRouter();
 
   useEffect(() => {
     fetchProductBySlug(slug).then((medusaProduct) => {
@@ -58,6 +60,14 @@ export default function ProductPage({
   // Adds the chosen size to the cart and opens the cart drawer
   const handleAddToCart = async () => {
     if (selectedVariant) await addItem(selectedVariant.id, quantity);
+  };
+
+  // Adds the chosen size and goes straight to checkout
+  const handleBuyNow = async () => {
+    if (selectedVariant && (await addItem(selectedVariant.id, quantity))) {
+      closeCart();
+      router.push("/checkout");
+    }
   };
 
   return (
@@ -173,9 +183,7 @@ export default function ProductPage({
             <div className="mb-6">
               <div className="flex items-center justify-between mb-3">
                 <p className="text-xs tracking-widest uppercase text-brown/60">Select Size</p>
-                <button className="text-xs text-brown/40 hover:text-brown transition-colors underline">
-                  Size Guide
-                </button>
+                <SizeGuide selectedSize={selectedSize} />
               </div>
               <div className="flex gap-2 flex-wrap">
                 {product.sizes.map((size) => (
@@ -237,7 +245,7 @@ export default function ProductPage({
                 {cartBusy ? "Adding…" : "Add to Cart"}
               </Button>
               <Button
-                onClick={handleAddToCart}
+                onClick={handleBuyNow}
                 variant="outline"
                 className="flex-1 flex items-center justify-center gap-2"
                 disabled={!canAddToCart}

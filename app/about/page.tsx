@@ -28,7 +28,7 @@ const values = [
 ];
 
 const process = [
-  { step: "01", title: "You Send the Saree", description: "Post your saree to us or drop it off in person. Silk, cotton, Kanjivaram, Banarasi — any saree works." },
+  { step: "01", title: "You Send the Saree", description: "Post your saree to us. Cotton, silk, Kanchipuram, Banarasi — any saree works." },
   { step: "02", title: "We Consult", description: "Our team reviews the saree with you — fabric width, pattern placement, what to preserve and how." },
   { step: "03", title: "We Craft", description: "The saree is carefully cut and stitched into your shirt, preserving borders and patterns exactly where they belong." },
   { step: "04", title: "Delivered Home", description: "Your shirt — and any leftover fabric — is shipped back to you, carefully packed, within 14 days." },
@@ -67,18 +67,33 @@ export default function AboutPage() {
             <div>
               <p className="section-subtitle">The Beginning</p>
               <h2 className="section-title mb-8">Why We Started</h2>
-              <div className="space-y-5 text-sm text-brown/60 leading-relaxed">
+              <div className="space-y-5 text-[15px] leading-relaxed text-brown/70">
                 <p>
-                  Bhuvan Reweaves began with a box of sarees. His mother's box — full of silk sarees from weddings, festivals and ordinary Sundays that had quietly accumulated over forty years.
+                  Some sarees carry more than memories. They hold moments, people and pieces of our
+                  lives that we never quite want to let go of.
                 </p>
                 <p>
-                  She would never wear them again. But she couldn't give them away either. They carried too much — the smell of jasmine, the weight of occasion, the faces of people no longer here.
+                  It could be your mother&rsquo;s favourite saree, the one she wore for a special
+                  occasion. A saree that belonged to someone you love. Or a beautiful 25-year-old
+                  treasure that has stayed with you through the years. Each one has a story, and
+                  sometimes, letting go of it feels impossible.
+                </p>
+                <p className="py-2 font-serif text-2xl italic leading-snug text-brown">
+                  But what if you could give that story a new beginning?
                 </p>
                 <p>
-                  Bhuvan had one of them — a deep ruby Kanjivaram — made into a shirt. Two weeks later he wore it to work. Three people stopped him before noon to ask where he got his shirt.
+                  At Bhuvan Reweaves, we believe cherished sarees deserve to be worn, loved and
+                  celebrated all over again. We transform them into thoughtfully redesigned kurtas and
+                  shirts, giving treasured fabrics a new form while keeping the memories woven into
+                  them.
                 </p>
                 <p>
-                  That was 2022. Since then, we've rewoven over 500 sarees into shirts for people across India — each one carrying the memory of the person who wore it first.
+                  And if you don&rsquo;t have a saree of your own to reimagine, that&rsquo;s perfectly
+                  alright. You can find a saree you love from our collection, and we&rsquo;ll help you
+                  turn it into something uniquely yours.
+                </p>
+                <p className="border-l-2 border-brown/30 pl-5 font-serif text-xl italic leading-snug text-brown">
+                  Because some memories are simply too beautiful to stay folded away.
                 </p>
               </div>
             </div>
@@ -92,10 +107,6 @@ export default function AboutPage() {
                   className="object-cover"
                   sizes="50vw"
                 />
-              </div>
-              <div className="absolute -bottom-4 -left-4 bg-cream border border-beige p-6 max-w-xs shadow-sm">
-                <p className="font-serif text-3xl text-brown">500+</p>
-                <p className="text-xs text-brown/50 tracking-widest uppercase mt-1">Sarees Rewoven</p>
               </div>
             </div>
           </div>

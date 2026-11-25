@@ -52,7 +52,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
-          className="flex flex-col sm:flex-row gap-4 mb-16"
+          className="flex flex-col sm:flex-row gap-4"
         >
           <Link
             href="/shop"
@@ -66,26 +66,6 @@ export default function HeroSection() {
           >
             Send Your Saree
           </Link>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.7 }}
-          className="flex gap-10"
-        >
-          {[
-            { value: "500+", label: "Sarees Rewoven" },
-            { value: "100%", label: "Handcrafted" },
-            { value: "Pan India", label: "Delivery" },
-          ].map((stat) => (
-            <div key={stat.label}>
-              <p className="font-serif text-2xl text-[#F8F5F0]">{stat.value}</p>
-              <p className="font-sans text-[#8B6352] text-xs tracking-widest uppercase mt-1">
-                {stat.label}
-              </p>
-            </div>
-          ))}
         </motion.div>
       </div>
 

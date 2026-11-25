@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Bookmark, ShoppingBag, Menu, Search, User, X } from "lucide-react";
 import MobileMenu from "./MobileMenu";
 import BrandLogo from "./BrandLogo";
-import AnnouncementBar from "./AnnouncementBar";
 import { useCart } from "@/components/cart/CartProvider";
 
 const navLinks = [
@@ -35,8 +34,6 @@ export default function Navbar() {
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         className="fixed top-0 left-0 right-0 z-40 bg-[#F8F5F0] border-b border-[#E8DDCF]"
       >
-        {/* 32px tall; <main> in app/layout.tsx is padded by the same amount */}
-        <AnnouncementBar />
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="flex items-center justify-between h-18 py-4">
             {/* Logo */}

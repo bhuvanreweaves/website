@@ -9,7 +9,11 @@
  * The publishable key comes from Medusa admin → Settings → Publishable API Keys
  * and must be linked to the sales channel the products are in.
  */
-export const MEDUSA_BACKEND_URL = "https://admin.bhuvanreweaves.com";
+export const MEDUSA_BACKEND_URL =
+  // Local development only: set NEXT_PUBLIC_LOCAL_MEDUSA_URL=http://localhost:9000
+  // in .env.local to try backend changes before they are deployed.
+  (process.env.NODE_ENV === "development" && process.env.NEXT_PUBLIC_LOCAL_MEDUSA_URL) ||
+  "https://admin.bhuvanreweaves.com";
 
 export const MEDUSA_PUBLISHABLE_KEY =
   "pk_f70c21a23f730cab737c27649947cb2387c4d9c6b2bd7061a599152cd77768ac";

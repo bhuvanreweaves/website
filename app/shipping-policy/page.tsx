@@ -6,7 +6,7 @@ import { POLICY } from "@/lib/site-info";
 
 export const metadata: Metadata = {
   title: "Shipping Policy",
-  description: `Free shipping on all orders across India. Delivered in ${POLICY.deliveryTime}.`,
+  description: `Free shipping on all orders across India, delivered in ${POLICY.deliveryTime}. International shipping available at extra cost.`,
 };
 
 export default function ShippingPolicyPage() {
@@ -21,7 +21,10 @@ export default function ShippingPolicyPage() {
               <strong>Free shipping</strong> on all orders, anywhere in India.
             </li>
             <li>
-              Delivered in <strong>{POLICY.deliveryTime}</strong>.
+              Delivered in <strong>{POLICY.deliveryTime}</strong> within India.
+            </li>
+            <li>
+              <strong>International shipping</strong> is available. Shipping charges apply.
             </li>
             <li>Tracking details are shared as soon as your order ships.</li>
           </ul>
@@ -29,21 +32,24 @@ export default function ShippingPolicyPage() {
       }
     >
       <h2>Where we ship</h2>
-      <p>
-        We currently ship to addresses within India only. We do not ship internationally at this
-        time.
-      </p>
-
-      <h2>Shipping charges</h2>
-      <p>Shipping is free on all orders, with no minimum order value.</p>
+      <ul>
+        <li>
+          <strong>India:</strong> free shipping on all orders.
+        </li>
+        <li>
+          <strong>Outside India:</strong> we ship internationally. Shipping charges apply, and we
+          confirm them with you before you pay.
+        </li>
+      </ul>
 
       <h2>Delivery time</h2>
       <p>
-        Orders are delivered within {POLICY.deliveryTime} of being placed. Orders placed on a
+        Orders within India are delivered within {POLICY.deliveryTime} of being placed. Orders placed on a
         Sunday or a public holiday are processed on the next working day. Deliveries to remote
         areas, or delays caused by courier partners, weather or other events outside our control,
         may take longer.
       </p>
+      <p>International delivery times vary by country. We share an estimate with your order.</p>
       <p>
         For &ldquo;Send Your Saree&rdquo; orders, the delivery time starts from the day your saree
         reaches us.

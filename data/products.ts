@@ -240,41 +240,6 @@ export function isProductCategory(value: unknown): value is ProductCategory {
   return productCategories.some((c) => c.id === value);
 }
 
-export const testimonials = [
-  {
-    id: "1",
-    name: "Arjun Mehta",
-    location: "Mumbai",
-    product: "Kanjivaram Silk Shirt",
-    rating: 5,
-    text: "My mother's old Kanjivaram saree sat in a box for 20 years. Bhuvan Reweaves turned it into the most beautiful shirt I've ever owned. I wore it to my sister's wedding and everyone asked where I got it.",
-  },
-  {
-    id: "2",
-    name: "Priya Sharma",
-    location: "Bangalore",
-    product: "Banarasi Weave Shirt",
-    rating: 5,
-    text: "I gifted my husband a shirt made from my grandmother's Banarasi saree. He cried when he opened it. You can feel the love and skill in every stitch. Something truly irreplaceable.",
-  },
-  {
-    id: "3",
-    name: "Rahul Krishnamurthy",
-    location: "Chennai",
-    product: "Mysore Silk Shirt",
-    rating: 5,
-    text: "The quality is unlike anything I've bought off a rack. It fits perfectly, feels incredible and carries a story only I know. Worth every rupee and more.",
-  },
-  {
-    id: "4",
-    name: "Deepa Iyer",
-    location: "Delhi",
-    product: "Cotton Saree Shirt",
-    rating: 5,
-    text: "Sent in my late mother's cotton saree and received a shirt for my father. He wears it every Sunday. It's not just a shirt — it's a memory he can hold close.",
-  },
-];
-
 export function getProductBySlug(slug: string): Product | undefined {
   return products.find((p) => p.slug === slug);
 }

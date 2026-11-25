@@ -111,27 +111,3 @@
 .legal-content strong {
   @apply font-medium text-brown;
 }
-
-/* Announcement bar (components/layout/AnnouncementBar.tsx) */
-@keyframes announcement-scroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-.announcement-track {
-  animation: announcement-scroll 60s linear infinite;
-}
-
-.announcement-bar:hover .announcement-track {
-  animation-play-state: paused;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .announcement-track {
-    animation: none;
-  }
-}

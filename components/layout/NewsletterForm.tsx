@@ -39,11 +39,11 @@ export default function NewsletterForm() {
   };
 
   return (
-    <form onSubmit={submit} className="w-full max-w-md">
+    <form onSubmit={submit} className="w-full">
       <label htmlFor="newsletter-email" className="sr-only">
         Email address
       </label>
-      <div className="flex items-center bg-cream">
+      <div className="flex gap-2">
         <input
           id="newsletter-email"
           type="email"
@@ -52,14 +52,14 @@ export default function NewsletterForm() {
           placeholder="Email address"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="min-w-0 flex-1 bg-transparent px-4 py-4 text-sm text-brown placeholder:text-brown/40 focus:outline-none"
+          className="min-w-0 flex-1 rounded-lg border border-cream/25 bg-transparent px-5 py-3 text-sm text-cream placeholder:text-cream/40 transition-colors focus:border-cream/70 focus:outline-none"
         />
         <button
           type="submit"
           disabled={status === "sending"}
-          className="px-5 py-4 text-xs uppercase tracking-[0.2em] text-brown transition-opacity hover:opacity-70 disabled:opacity-50"
+          className="rounded-lg bg-cream px-6 py-3 text-sm font-medium text-brown transition-opacity hover:opacity-85 disabled:opacity-50"
         >
-          {status === "sending" ? "Sending…" : "Subscribe"}
+          {status === "sending" ? "Sending…" : "Sign up"}
         </button>
       </div>
       <p

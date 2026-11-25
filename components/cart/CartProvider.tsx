@@ -27,6 +27,8 @@ interface CartContextValue {
   addItem: (variantId: string, quantity: number) => Promise<boolean>;
   updateItem: (lineId: string, quantity: number) => Promise<void>;
   removeItem: (lineId: string) => Promise<void>;
+  /** Forget the cart after it has become an order */
+  clearCart: () => void;
 }
 
 const CartContext = createContext<CartContextValue | null>(null);
@@ -115,6 +117,12 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     [cart, run, removeItem]
   );
 
+  const clearCart = useCallback(() => {
+    saveCartId(null);
+    setCart(null);
+    setIsOpen(false);
+  }, []);
+
   const value = useMemo<CartContextValue>(
     () => ({
       cart,
@@ -128,8 +136,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       addItem,
       updateItem,
       removeItem,
+      clearCart,
     }),
-    [cart, ready, isOpen, busy, error, addItem, updateItem, removeItem]
+    [cart, ready, isOpen, busy, error, addItem, updateItem, removeItem, clearCart]
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

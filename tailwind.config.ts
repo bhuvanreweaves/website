@@ -29,7 +29,7 @@ const config: Config = {
         },
         charcoal: "#1E1E1E",
         // Colour of the Bhuvan Reweaves logo
-        plum: "#37112F",
+        plum: "#381130",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

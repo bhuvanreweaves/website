@@ -2,7 +2,8 @@ import Image from "next/image";
 
 /**
  * Bhuvan Reweaves logo: the BR mark (image from the brand logo) next to the
- * name set in the site's serif, matching the logo's spaced capitals.
+ * name set in the site's serif, matching the logo's spaced capitals,
+ * stacked on two lines (Bhuvan / Reweaves).
  * The name is real text so it stays sharp and readable at small sizes.
  */
 type Tone = "plum" | "cream";
@@ -11,9 +12,9 @@ type Size = "sm" | "md" | "lg";
 const MARK_RATIO = 206 / 209; // height / width of /brand/br-mark.png
 
 const SIZES: Record<Size, { mark: number; text: string; gap: string }> = {
-  sm: { mark: 32, text: "text-[11px]", gap: "gap-2.5" },
-  md: { mark: 40, text: "text-[12px] sm:text-[13px]", gap: "gap-3" },
-  lg: { mark: 56, text: "text-[15px]", gap: "gap-4" },
+  sm: { mark: 32, text: "text-[12px]", gap: "gap-2.5" },
+  md: { mark: 40, text: "text-[13px] sm:text-[14px]", gap: "gap-3" },
+  lg: { mark: 56, text: "text-[17px]", gap: "gap-4" },
 };
 
 export default function BrandLogo({
@@ -36,11 +37,12 @@ export default function BrandLogo({
         priority={priority}
       />
       <span
-        className={`font-serif font-medium uppercase leading-none tracking-[0.28em] whitespace-nowrap ${s.text} ${
+        className={`font-serif font-medium uppercase leading-none tracking-[0.16em] whitespace-nowrap ${s.text} ${
           tone === "cream" ? "text-cream" : "text-plum"
         }`}
       >
-        Bhuvan Reweaves
+        <span className="block">Bhuvan</span>
+        <span className="mt-1 block">Reweaves</span>
       </span>
     </span>
   );

@@ -10,7 +10,7 @@ const steps = [
   {
     icon: Package,
     title: "Send Your Saree",
-    desc: "Post or hand-deliver your saree to us. Any saree — silk, cotton, vintage, new.",
+    desc: "Post your saree to us. Any saree — cotton, silk, vintage, new.",
   },
   {
     icon: Ruler,

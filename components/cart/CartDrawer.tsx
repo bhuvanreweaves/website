@@ -190,17 +190,24 @@ export default function CartDrawer() {
                     >
                       View cart
                     </Link>
+                    <Link
+                      href="/checkout"
+                      onClick={closeCart}
+                      className={`${pill} bg-brown text-cream hover:bg-brown-light`}
+                    >
+                      Checkout
+                    </Link>
+                  </div>
+                  <p className="mt-3 text-center text-[11px] text-brown/40">
+                    Pay securely with UPI, cards or netbanking.{" "}
                     <a
                       href={whatsappCheckoutUrl(cart!)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`${pill} bg-brown text-cream hover:bg-brown-light`}
+                      className="underline underline-offset-2 hover:text-brown"
                     >
-                      Checkout
+                      Or order on WhatsApp
                     </a>
-                  </div>
-                  <p className="mt-3 text-center text-[11px] text-brown/40">
-                    Checkout continues on WhatsApp, where we confirm your order and payment.
                   </p>
                 </div>
               </>

@@ -199,16 +199,22 @@ export default function CartPage() {
                   </p>
                 )}
 
-                <a
-                  href={whatsappCheckoutUrl(cart, note)}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="/checkout"
                   className={`${pill} mt-6 w-full bg-brown text-cream hover:bg-brown-light`}
                 >
                   Checkout
-                </a>
+                </Link>
                 <p className="mt-3 text-center text-[11px] text-brown/50">
-                  Checkout continues on WhatsApp, where we confirm your order and payment.
+                  Pay securely with UPI, cards or netbanking.{" "}
+                  <a
+                    href={whatsappCheckoutUrl(cart, note)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline underline-offset-2 hover:text-brown"
+                  >
+                    Or order on WhatsApp
+                  </a>
                 </p>
               </div>
             </aside>

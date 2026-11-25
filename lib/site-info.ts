@@ -17,7 +17,7 @@ export const SITE = {
   phoneDisplay: "+91 89037 25057",
   whatsappNumber: "918903725057",
   instagramHandle: "bhuvanreweaves",
-  address: "[Business address, City, State, PIN code]",
+  address: "9E, Krishna Nagar Extension, Gobichettipalayam, Erode District, Tamil Nadu 638452",
   // Leave empty to hide it
   gstin: "",
   grievanceOfficer: "[Name of grievance officer]",
